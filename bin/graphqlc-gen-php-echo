@@ -1,10 +1,10 @@
-#!/usr/local/bin/php
+#!/usr/bin/php
 <?php declare(strict_types=1);
 
 require __DIR__ . '/../vendor/autoload.php';
 
-use SOCi\Graphqlc\Compiler\CodeGeneratorRequest;
-// use SOCi\Echo\Generator;
+use Graphqlc\Compiler\CodeGeneratorRequest;
+use PhpEcho\Generator;
 
 $stdin = fopen('php://stdin', 'r');
 $stdout = fopen('php://stdin', 'w');
@@ -16,8 +16,13 @@ try {
 	$request = new CodeGeneratorRequest();
 	$request->mergeFromString($data);
 
+	$g = new Generator($request);
 
+	fwrite($stdout, $g->GenerateAllFiles()->serializeToString());
+	fclose($stdout);
 } catch (\Throwable $t) {
 	fwrite($stderr, $t->getMessage());
 	exit(1);
 }
+
+exit(0);
