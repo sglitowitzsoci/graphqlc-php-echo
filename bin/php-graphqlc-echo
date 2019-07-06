@@ -1,0 +1,23 @@
+#!/usr/local/bin/php
+<?php declare(strict_types=1);
+
+require __DIR__ . '/../vendor/autoload.php';
+
+use SOCi\Graphqlc\Compiler\CodeGeneratorRequest;
+// use SOCi\Echo\Generator;
+
+$stdin = fopen('php://stdin', 'r');
+$stdout = fopen('php://stdin', 'w');
+$stderr = fopen('php://stderr', 'w');
+
+$data = stream_get_contents($stdin);
+
+try {
+	$request = new CodeGeneratorRequest();
+	$request->mergeFromString($data);
+
+
+} catch (\Throwable $t) {
+	fwrite($stderr, $t->getMessage());
+	exit(1);
+}

@@ -1,0 +1,19 @@
+{
+    "name": "samlitowitz/php-graphqcl-echo",
+    "type": "project",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Sam Litowitz",
+            "email": "sglitowitz@gmail.com"
+        }
+    ],
+    "autoload": {
+      "psr-4": {
+        "SOCi\\": ["src/"]
+      }
+    },
+    "require": {
+        "google/protobuf": "^3.8"
+    }
+}
